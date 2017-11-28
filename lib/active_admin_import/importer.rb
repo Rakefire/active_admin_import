@@ -60,6 +60,14 @@ module ActiveAdminImport
       end
     end
 
+    def batch_update(header_key, value)
+      index = header_index(header_key)
+      csv_lines.map! do |line|
+        line[index] = value
+        line
+      end
+    end
+
     def values_at(header_key)
       csv_lines.collect { |line| line[header_index(header_key)] }.uniq
     end
